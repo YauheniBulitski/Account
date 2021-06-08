@@ -1,0 +1,40 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+        id "org.flywaydb.flyway" version "7.9.2"
+}
+
+group = 'com.bulitski'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.11'
+    compile 'org.mapstruct:mapstruct:1.4.2.Final'
+    implementation "org.flywaydb:flyway-core:7.9.2"
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.10.0'
+    compile  'org.mockito:mockito-core:3.7.0'
+    compile  'org.assertj:assertj-core:3.3.0'
+    testImplementation ('org.springframework.boot:spring-boot-starter-test'){
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.mockito'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

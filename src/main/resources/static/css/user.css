@@ -1,0 +1,71 @@
+body{
+    background: url(../css/user.jpeg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+h1{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: 60px;
+    color: goldenrod;
+    text-align: center;
+}
+
+#reg {
+    width: 200px;
+    height: 100px;
+    float: right;
+    background: rgb(0,255,153);
+}
+
+.center{
+    display: block;
+    margin-left: 25%;
+    bottom: 0;
+    position: absolute;
+}
+
+.fix{
+    max-width: 100%;
+    min-height:100%;
+    position:relative;
+    padding-bottom: 60px;
+}
+.shop{
+    margin-top: 10%;
+}
+
+.bat{
+    display: block;
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.pay{
+    display: block;
+    margin-left: 33.5%;
+}
+
+.cash{
+    display: block;
+    margin-left: 25.5%;
+}
+
+.orders{
+    margin-top: 5%;
+}
+
+.view{
+    margin-top: 5%;
+}
+
+.ref{
+    padding: 10px 20px;
+    font-size: 25px;
+    border-radius: 10px;
+    width:50%;
+    display: block;
+    margin-left: 43.5%;
+}

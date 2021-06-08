@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/reg.css">
+    <title>EditUser</title>
+</head>
+<body>
+<div class="row reg">
+    <div class="col-md-4 col-md-push-4 container">
+        <div class="row main-form">
+            <form th:action="@{/user/update}" method="post" th:object="${userAccountDto}">
+                <div class="form-group">
+                    <label th:for="id"  th:text="id"class="cols-sm-4  text-dark control-label"></label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></span>
+                            <input th:field="*{id}"  type="text" class="form-control"
+                                   th:value="${id}" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label th:for="userName"  th:text="UserName"class="cols-sm-4  text-dark control-label"></label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></span>
+                            <input th:field="*{userName}"  required type="text" class="form-control"/>
+                        </div>
+                        <span th:each="err : ${#fields.errors('userName')}" th:text="#{${err}}" style="color: red">Error</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="password" th:text="Password"
+                           class="cols-sm-4 text-dark control-label"></label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-file-text" aria-hidden="true"></i></span>
+                            <input  th:field="*{password}" type="text" class="form-control"
+                                   th:placeholder="password"/>
+                        </div>
+                        <span th:each="err : ${#fields.errors('password')}" th:text="#{${err}}"
+                              style="color: red">Error</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="firstName" th:text="FirstName" class="cols-sm-4 text-dark control-label"></label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                            <input th:field="*{firstName}" required type="text" class="form-control" p th:placeholder="firsName"/>
+                        </div>
+                        <span th:each="err : ${#fields.errors('firstName')}" th:text="#{${err}}" style="color: red">Error</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="lastName" th:text="LastName" class="cols-sm-4 text-dark control-label"></label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-align-justify" aria-hidden="true"></i></span>
+                            <input th:field="*{lastName}" class="form-control" name="count" required type="text"
+                                   th:placeholder="LastName"/>
+                        </div>
+                        <span th:each="err : ${#fields.errors('lastName')}" th:text="#{${err}}"
+                              style="color: red">Error</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="status" th:text="Status" class="cols-sm-4 text-dark control-label"></label>
+                    <div class="cols-sm-4">
+                        <select class="form-control" id="status" name="status">
+                            <option th:value="*{status}" th:text="*{status}">USER</option>
+                            <span   th:if="*{status.name}=='INACTIVE'">
+                            <option th:value="ACTIVE" th:text="ACTIVE">UNLOCK</option>
+                            </span>
+                            <span   th:if="*{status.name}=='ACTIVE'">
+                            <option th:value="INACTIVE" th:text="INACTIVE">LOCK</option>
+                            </span>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="role" th:text="Role" class="cols-sm-4 text-dark control-label"></label>
+                    <div class="cols-sm-4">
+                        <select class="form-control" id="role" name="role" >
+                            <option th:value="*{role}" th:text="*{role}">US</option>
+                          <span   th:if="*{role.name}=='USER'">
+                            <option th:value="ADMIN" th:text="ADMIN">ADMIN</option>
+                              </span>
+                            <span   th:if="*{role.name}=='ADMIN'">
+                            <option th:value="USER" th:text="USER">USER</option>
+                                </span>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <input type="submit" target="_blank" value="SAVE"
+                           class="btn btn-success btn-lg btn-block login-button"/>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

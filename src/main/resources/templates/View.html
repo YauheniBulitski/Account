@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" type="text/css" href="/css/reg.css">
+    <title>View</title>
+</head>
+<body>
+<div class="row reg">
+    <div class="col-md-4 col-md-push-4 container">
+        <div class="row main-form">
+            <div class="form-group">
+                <label th:for="id" th:text="id" class="cols-sm-4  text-dark control-label"></label>
+                <div class="cols-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control"
+                               th:value="${user.id}" readonly/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label th:for="userName" th:text="UserName" class="cols-sm-4  text-dark control-label"></label>
+                <div class="cols-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></span>
+                        <input th:value="${user.userName}" readonly type="text" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label th:for="firstName" th:text="LastName" class="cols-sm-4 text-dark control-label"></label>
+                <div class="cols-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-align-justify" aria-hidden="true"></i></span>
+                        <input th:value="${user.firstName}" readonly class="form-control" type="text"/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label th:for="lastName" th:text="LastName" class="cols-sm-4 text-dark control-label"></label>
+                <div class="cols-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-align-justify" aria-hidden="true"></i></span>
+                        <input th:value="${user.lastName}" readonly class="form-control" type="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label th:for="createdAt" th:text="CreatedAt" class="cols-sm-4 text-dark control-label"></label>
+                <div class="cols-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-align-justify" aria-hidden="true"></i></span>
+                        <input th:value="${user.createdAt}" readonly class="form-control" type="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label th:for="status" th:text="Status" class="cols-sm-4 text-dark control-label"></label>
+                <div class="cols-sm-4">
+
+                    <div sec:authorize="hasAuthority('USER')" class="dropdown">
+                        <div class="form-group">
+                            <div class="cols-sm-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-align-justify"
+                                                                       aria-hidden="true"></i></span>
+                                    <input th:value="${user.status}" readonly class="form-control" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div sec:authorize="hasAuthority('ADMIN')" class="dropdown">
+
+                            <button type="button" class="form-control" data-toggle="dropdown">
+                                <span th:text="${user.status.name}"></span>
+                            </button>
+                            <div class="dropdown-menu col-md-1 offset-5">
+                                 <span th:if="${user.status.name}=='ACTIVE'">
+                                 <a class="form-control"  th:href="@{'/lock?id='+${user.id}+'&status=lock'}">LOCK</a>
+                                    </span>
+                                <span th:if="${user.status.name}=='INACTIVE'">
+                                    <a class="form-control" th:href="@{'/lock?id='+${user.id}+'&status=unlock'}">UNLOCK</a>
+                                     </span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label th:for="role" th:text="Role" class="cols-sm-4 text-dark control-label"></label>
+                <div class="cols-sm-4">
+
+                    <div sec:authorize="hasAuthority('USER')" class="dropdown">
+                        <div class="form-group">
+                            <div class="cols-sm-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-align-justify"
+                                                                       aria-hidden="true"></i></span>
+                                    <input th:value="${user.role}" readonly class="form-control" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+
+                        <button type="button" class="btn dropdown-toggle form-control" data-toggle="dropdown">
+                            <span th:text="${user.role.name}"></span>
+                        </button>
+                            <div class="dropdown-menu col-md-4 offset-3">
+                                 <span th:if="${user.role.name}=='USER'">
+                                 <a class="form-control " th:href="@{'/role?id='+${user.id}+'&role=ADMIN'}">ADMIN</a>
+                                    </span>
+                                <span th:if="${user.role.name}=='ADMIN'">
+                                    <a class="form-control" th:href="@{'/role?id='+${user.id}+'&role=USER'}">USER</a>
+                                     </span>
+                    </div>
+<!--                        <select class="form-control" id="role" name="role">-->
+<!--                            <option th:value="${user.role}" th:text="${user.role}">US</option>-->
+<!--                            <span th:if="${user.role.name}=='USER'">-->
+<!--                            <option th:value="ADMIN" th:text="ADMIN">ADMIN</option>-->
+<!--                              </span>-->
+<!--                            <span th:if="${user.role.name}=='ADMIN'">-->
+<!--                            <option th:value="USER" th:text="USER">USER</option>-->
+<!--                                </span>-->
+<!--                            </option>-->
+<!--                        </select>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success btn-lg btn-block login-button"
+                   th:href="@{'/user/'+${user.id}+'/edit'}">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
