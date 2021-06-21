@@ -15,6 +15,6 @@ Cтэк технологий:
 2. Spring (Spring Boot, Spring MVC, Spring Data, Spring Security)
 3. PostgreSQL,FlyWay
 4. Thymeleaf,Bootstrap
-5. Maven
+5. Gradle
 
 Описание проекта в ТЗ.pdf
